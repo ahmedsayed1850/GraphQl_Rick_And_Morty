@@ -1,6 +1,7 @@
 import React from "react";
 import { useCharacters } from "../hooks/useCharacters";
 import "./CharacterList.css";
+import { Link } from "react-router-dom";
 const CharacterList = () => {
   const { error, data, loading } = useCharacters();
   if (loading) {
@@ -8,16 +9,15 @@ const CharacterList = () => {
   } else if (error) {
     return <div>error...</div>;
   }
-  console.log({ error, data, loading });
 
   return (
     <div className="CharacterList">
       {data.characters.results.map((character) => {
         return (
-          <div>
+          <Link to={`/${character.id}`}>
             <img src={character.image} />
             <h2>{character.name}</h2>
-          </div>
+          </Link>
         );
       })}
     </div>
